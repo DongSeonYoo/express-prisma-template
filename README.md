@@ -1,6 +1,16 @@
 # express-ts-prisma template for me
 
-    base on prisma - postgres
+**base on prisma - postgres**
+
+## start
+
+```shell
+git clone https://github.com/DongSeonYoo/express-prisma-template.git
+
+npm install
+
+npm run dev
+```
 
 ## structure
 
