@@ -3,7 +3,7 @@ import { NextFunction, Router, Response, Request } from 'express';
 import { BadRequestException, NotFoundException } from '../utils/custom-error';
 import { ResponseEntity } from '../utils/response-entity';
 import { validate } from '../utils/validater';
-import exceptionWrap from '../utils/wrap-async';
+import exceptionWrap from '../utils/exception-wrap';
 
 const router = Router();
 const prisma = new PrismaClient();

@@ -1,7 +1,7 @@
 import express from 'express';
 import errorHandling from './middlewares/error-handling';
 import routes from './routes';
-import exceptionWrap from './utils/wrap-async';
+import exceptionWrap from './utils/exception-wrap';
 
 const app = express();
 
