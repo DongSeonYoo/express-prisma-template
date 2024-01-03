@@ -1,13 +1,9 @@
 import { PrismaClient } from '@prisma/client';
-import { Router } from 'express';
-import {
-    BadRequestException,
-    NotFoundException,
-    UnauthorizedException,
-} from '../utils/custom-error';
+import { NextFunction, Router, Response, Request } from 'express';
+import { BadRequestException, NotFoundException } from '../utils/custom-error';
 import { ResponseEntity } from '../utils/response-entity';
-import { HttpStatus } from '../utils/http-status';
 import { validate } from '../utils/validater';
+import exceptionWrap from '../utils/wrap-async';
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -15,17 +11,15 @@ const prisma = new PrismaClient();
 /**
  * GET /test/posts
  */
-router.get('/post-count', async (req, res, next) => {
+router.get('/post-count', async (req: Request, res: Response, next: NextFunction) => {
     const count = await prisma.post_tb.count();
 
-    return res.send(ResponseEntity.SUCCESS_WITH(count));
+    return res.send(ResponseEntity.SUCCESS_WITH({ count }));
 });
 
-/**
- * GET /test/post/:postId
- */
-router.get('/post/:postId', async (req, res, next) => {
-    try {
+router.get(
+    '/post/:postId',
+    exceptionWrap(async (req: Request, res: Response, next: NextFunction) => {
         const { postId } = req.params;
 
         validate(postId, 'postId').checkInput().isNumber();
@@ -41,10 +35,8 @@ router.get('/post/:postId', async (req, res, next) => {
         }
 
         return res.send(ResponseEntity.SUCCESS_WITH(post));
-    } catch (error) {
-        return next(error);
-    }
-});
+    }),
+);
 
 // 100개 insert
 router.post('/push', async (req, res, next) => {
@@ -63,11 +55,7 @@ router.post('/push', async (req, res, next) => {
 
 // throw error test
 router.get('/error', (req, res, next) => {
-    try {
-        throw new BadRequestException('400에러던집니다 잘받으십쇼');
-    } catch (error) {
-        return next(error);
-    }
+    throw new BadRequestException('400에러던집니다 잘받으십쇼');
 });
 
 export default router;
