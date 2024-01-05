@@ -1,7 +1,6 @@
 import express from 'express';
 import errorHandling from './middlewares/error-handling';
 import routes from './routes';
-import exceptionWrap from './utils/exception-wrap';
 
 const app = express();
 
@@ -9,7 +8,7 @@ const app = express();
 app.use(express.json());
 
 // navigate routes
-app.use('/', exceptionWrap(routes));
+app.use('/', routes);
 
 // global error hanlding
 app.use(errorHandling);
