@@ -3,7 +3,7 @@ import { NextFunction, Router, Response, Request } from 'express';
 import { BadRequestException, NotFoundException } from '../utils/custom-error';
 import { ResponseEntity } from '../utils/response-entity';
 import { validate } from '../utils/validater';
-import exceptionWrap from '../utils/exception-wrap';
+import asyncWrap from '../utils/async-wrap';
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -11,15 +11,18 @@ const prisma = new PrismaClient();
 /**
  * GET /test/posts
  */
-router.get('/post-count', async (req: Request, res: Response, next: NextFunction) => {
-  const count = await prisma.post_tb.count();
+router.get(
+  '/post-count',
+  asyncWrap(async (req: Request, res: Response, next: NextFunction) => {
+    const count = await prisma.post_tb.count();
 
-  return res.send(ResponseEntity.SUCCESS_WITH({ count }));
-});
+    return res.send(ResponseEntity.SUCCESS_WITH({ count }));
+  }),
+);
 
 router.get(
   '/post/:postId',
-  exceptionWrap(async (req: Request, res: Response, next: NextFunction) => {
+  asyncWrap(async (req: Request, res: Response, next: NextFunction) => {
     const { postId } = req.params;
 
     validate(postId, 'postId').checkInput().isNumber();
@@ -39,23 +42,29 @@ router.get(
 );
 
 // 100개 insert
-router.post('/push', async (req, res, next) => {
-  for (let i = 1; i <= 100; i++) {
-    await prisma.post_tb.create({
-      data: {
-        user_id: 11,
-        title: `title ${i}`,
-        content: `content ${i}`,
-      },
-    });
-  }
+router.post(
+  '/push',
+  asyncWrap(async (req: Request, res: Response, next: NextFunction) => {
+    for (let i = 1; i <= 100; i++) {
+      await prisma.post_tb.create({
+        data: {
+          user_id: 11,
+          title: `title ${i}`,
+          content: `content ${i}`,
+        },
+      });
+    }
 
-  return res.send('success');
-});
+    return res.send('success');
+  }),
+);
 
 // throw error test
-router.get('/error', (req, res, next) => {
-  throw new BadRequestException('400에러던집니다 잘받으십쇼');
-});
+router.get(
+  '/error',
+  asyncWrap(async (req: Request, res: Response, next: NextFunction) => {
+    throw new BadRequestException('qwer');
+  }),
+);
 
 export default router;
