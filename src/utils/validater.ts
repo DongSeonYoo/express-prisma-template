@@ -1,4 +1,4 @@
-import { errorMessage } from './constants/validate-message';
+import { validateMessage } from './constants/validate-message';
 import { BadRequestException } from './custom-error';
 
 class Validate {
@@ -9,7 +9,7 @@ class Validate {
    */
   checkInput() {
     if (this.input === undefined || this.input === '') {
-      this.setError(`${this.name}: ${errorMessage.invalidInput}`);
+      this.setError(`${this.name}: ${validateMessage.invalidInput}`);
     }
     return this;
   }
@@ -22,7 +22,7 @@ class Validate {
   checkLength(min: number, max: number) {
     const input = String(this.input);
     if (input.length < min || input.length > max) {
-      this.setError(`${this.name}: ${errorMessage.length}`);
+      this.setError(`${this.name}: ${validateMessage.length}`);
     }
     return this;
   }
@@ -32,7 +32,7 @@ class Validate {
    */
   checkRegex(regex: RegExp) {
     if (!regex.test(this.input)) {
-      this.setError(`${this.name}: ${errorMessage.regex}`);
+      this.setError(`${this.name}: ${validateMessage.regex}`);
     }
     return this;
   }
@@ -42,7 +42,7 @@ class Validate {
    */
   isNumber() {
     if (isNaN(Number(this.input))) {
-      this.setError(`${this.name}: ${errorMessage.isNumber}`);
+      this.setError(`${this.name}: ${validateMessage.isNumber}`);
     }
 
     return this;
@@ -52,7 +52,7 @@ class Validate {
    * boolean 타입인지 검사한다
    */
   isBoolean() {
-    if (typeof this.input !== 'boolean') this.setError(errorMessage.isBoolean);
+    if (typeof this.input !== 'boolean') this.setError(validateMessage.isBoolean);
     return this;
   }
 

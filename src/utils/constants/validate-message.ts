@@ -1,4 +1,4 @@
-export const errorMessage = {
+export const validateMessage = {
   invalidInput: '요청값이 잘못되었습니다',
   length: '길이가 비정상적입니다',
   regex: '정규표현식 실패',
