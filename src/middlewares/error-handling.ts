@@ -6,7 +6,7 @@ import { HttpStatus } from '../utils/http-status';
 const errorHandling: ErrorRequestHandler = (error: CustomError | Error, req, res, next) => {
   console.error(error);
 
-  if (error instanceof Error) {
+  if (!(error instanceof CustomError)) {
     return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(ResponseEntity.ERROR());
   }
 
