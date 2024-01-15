@@ -16,6 +16,8 @@ npx prisma db pull # You need to create dotenv
 npm run dev
 ```
 
+## .env
+
 ```shell
 PORT=
 
