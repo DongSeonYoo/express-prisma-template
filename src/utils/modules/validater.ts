@@ -1,4 +1,4 @@
-import { validateMessage } from './constants/validate-message';
+import { validateMessage } from '../constants/validate-message';
 import { BadRequestException } from './custom-error';
 
 class Validate {

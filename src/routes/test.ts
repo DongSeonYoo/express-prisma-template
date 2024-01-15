@@ -1,9 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 import { NextFunction, Router, Response, Request } from 'express';
-import { BadRequestException, NotFoundException } from '../utils/custom-error';
-import { ResponseEntity } from '../utils/response-entity';
-import { validate } from '../utils/validater';
-import asyncWrap from '../utils/async-wrap';
+import { BadRequestException, NotFoundException } from '../utils/modules/custom-error';
+import { ResponseEntity } from '../utils/modules/response-entity';
+import { validate } from '../utils/modules/validater';
+import asyncWrap from '../utils/modules/async-wrap';
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -11,14 +11,11 @@ const prisma = new PrismaClient();
 /**
  * GET /test/posts
  */
-router.get(
-  '/post-count',
-  asyncWrap(async (req: Request, res: Response, next: NextFunction) => {
-    const count = await prisma.post_tb.count();
+router.get('/post-count', async (req: Request, res: Response, next: NextFunction) => {
+  const count = await prisma.post_tb.count();
 
-    return res.send(ResponseEntity.SUCCESS_WITH({ count }));
-  }),
-);
+  return res.send(ResponseEntity.SUCCESS_WITH({ count }));
+});
 
 router.get(
   '/post/:postId',
@@ -63,7 +60,7 @@ router.post(
 router.get(
   '/error',
   asyncWrap(async (req: Request, res: Response, next: NextFunction) => {
-    throw new BadRequestException('qwer');
+    throw new BadRequestException('Error');
   }),
 );
 
