@@ -1,6 +1,14 @@
+import express from 'express';
+import loader from './utils/loaders';
 import { env } from './configs/env';
-import app from './server';
 
-app.listen(env.PORT, () => {
-  console.log(`server running at ${env.PORT}`);
-});
+async function startServer() {
+  const app = express();
+  await loader(app);
+
+  app.listen(env.PORT, () => {
+    console.log(`${env.PORT}번에서 실행`);
+  });
+}
+
+startServer();

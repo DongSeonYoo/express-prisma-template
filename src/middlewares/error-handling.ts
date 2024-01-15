@@ -1,7 +1,7 @@
 import { ErrorRequestHandler } from 'express';
-import { ResponseEntity } from '../utils/response-entity';
-import { CustomError } from '../utils/custom-error';
-import { HttpStatus } from '../utils/http-status';
+import { ResponseEntity } from '../utils/modules/response-entity';
+import { CustomError } from '../utils/modules/custom-error';
+import { HttpStatus } from '../utils/modules/http-status';
 
 const errorHandling: ErrorRequestHandler = (error: CustomError | Error, req, res, next) => {
   console.error(error);
