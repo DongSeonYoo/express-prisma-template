@@ -12,7 +12,7 @@ const prisma = new PrismaClient();
  * GET /test/posts
  */
 router.get('/post-count', async (req: Request, res: Response, next: NextFunction) => {
-  const count = await prisma.post_tb.count();
+  const count = await prisma.post.count();
 
   return res.send(ResponseEntity.SUCCESS_WITH({ count }));
 });
@@ -24,7 +24,7 @@ router.get(
 
     validate(postId, 'postId').checkInput().isNumber();
 
-    const post = await prisma.post_tb.findUnique({
+    const post = await prisma.post.findUnique({
       where: {
         id: parseInt(postId),
       },
@@ -43,9 +43,9 @@ router.post(
   '/push',
   asyncWrap(async (req: Request, res: Response, next: NextFunction) => {
     for (let i = 1; i <= 100; i++) {
-      await prisma.post_tb.create({
+      await prisma.post.create({
         data: {
-          user_id: 11,
+          userId: 11,
           title: `title ${i}`,
           content: `content ${i}`,
         },
