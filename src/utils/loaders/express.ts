@@ -7,5 +7,5 @@ export default function (app: Application) {
   app.use(json());
   app.use(cookieParser());
   app.use('/', setRoute());
-  app.use(errorHandling);
+  app.use(errorHandling());
 }
