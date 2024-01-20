@@ -1,23 +1,27 @@
 import { PrismaClient } from '@prisma/client';
 import { NextFunction, Router, Response, Request } from 'express';
-import { BadRequestException, NotFoundException } from '../utils/modules/custom-error';
-import { ResponseEntity } from '../utils/modules/response-entity';
-import { validate } from '../utils/modules/validater';
-import asyncWrap from '../utils/modules/async-wrap';
+import { BadRequestException, NotFoundException } from '../../utils/modules/custom-error';
+import { ResponseEntity } from '../../utils/modules/response-entity';
+import { validate } from '../../utils/modules/validater';
+import asyncWrap from '../../utils/modules/async-wrap';
 
-const router = Router();
+const testRouter = Router();
 const prisma = new PrismaClient();
+
+testRouter.get('/', (req, res, next) => {
+  return res.send('qer');
+});
 
 /**
  * GET /test/posts
  */
-router.get('/post-count', async (req: Request, res: Response, next: NextFunction) => {
+testRouter.get('/post-count', async (req: Request, res: Response, next: NextFunction) => {
   const count = await prisma.post.count();
 
   return res.send(ResponseEntity.SUCCESS_WITH({ count }));
 });
 
-router.get(
+testRouter.get(
   '/post/:postId',
   asyncWrap(async (req: Request, res: Response, next: NextFunction) => {
     const { postId } = req.params;
@@ -39,7 +43,7 @@ router.get(
 );
 
 // 100개 insert
-router.post(
+testRouter.post(
   '/push',
   asyncWrap(async (req: Request, res: Response, next: NextFunction) => {
     for (let i = 1; i <= 100; i++) {
@@ -57,11 +61,11 @@ router.post(
 );
 
 // throw error test
-router.get(
+testRouter.get(
   '/error',
   asyncWrap(async (req: Request, res: Response, next: NextFunction) => {
     throw new BadRequestException('Error');
   }),
 );
 
-export default router;
+export default testRouter;
