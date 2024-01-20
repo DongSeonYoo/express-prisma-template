@@ -27,22 +27,28 @@ DATABASE_URL=postgresql://janedoe:mypassword@localhost:5432/mydb
 ## structure
 
 ```shell
-/src
+src
+├── apis
+│   ├── test
+│   │   └── test.ts
+│   └── user
+│       └── user.ts
 ├── app.ts
 ├── configs
 │   └── env.ts
 ├── middlewares
 │   └── error-handling.ts
-├── routes
-│   ├── index.ts
-│   └── test.ts
-├── server.ts       # entry point
 └── utils
-    ├── async-wrap.ts
     ├── constants
     │   └── validate-message.ts
-    ├── custom-error.ts
-    ├── http-status.ts
-    ├── response-entity.ts
-    └── validater.ts
+    ├── loaders
+    │   ├── express.ts
+    │   ├── index.ts
+    │   └── set-route.ts
+    └── modules
+        ├── async-wrap.ts
+        ├── custom-error.ts
+        ├── http-status.ts
+        ├── response-entity.ts
+        └── validater.ts
 ```
