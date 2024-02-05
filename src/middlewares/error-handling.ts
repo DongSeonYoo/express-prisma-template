@@ -1,6 +1,6 @@
-import { ResponseEntity } from '../utils/modules/response-entity';
-import { CustomError } from '../utils/modules/custom-error';
-import { HttpStatus } from '../utils/modules/http-status';
+import { ResponseEntity } from '../utils/modules/response-entity.module';
+import { CustomError } from '../utils/modules/custom-error.module';
+import { HttpStatus } from '../utils/modules/http-status.module';
 import { Request, Response, NextFunction } from 'express';
 
 export default function () {
@@ -14,6 +14,6 @@ export default function () {
 
     return res
       .status(error.statusCode)
-      .send(ResponseEntity.ERROR_WITH(error.statusCode, error.message));
+      .send(ResponseEntity.ERROR_WITH(error.statusCode, error.message, error.reason));
   };
 }

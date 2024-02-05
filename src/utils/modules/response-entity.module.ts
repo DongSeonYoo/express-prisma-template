@@ -1,4 +1,4 @@
-import { HttpStatus } from './http-status';
+import { HttpStatus } from './http-status.module';
 
 export class ResponseEntity<T> {
   private constructor(
@@ -27,7 +27,7 @@ export class ResponseEntity<T> {
     );
   }
 
-  static ERROR_WITH(httpStatus: HttpStatus, message: string): ResponseEntity<string> {
-    return new ResponseEntity<string>(httpStatus, message, '');
+  static ERROR_WITH<T>(httpStatus: HttpStatus, message: string, data: any = {}): ResponseEntity<T> {
+    return new ResponseEntity<T>(httpStatus, message, data);
   }
 }
