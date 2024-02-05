@@ -1,10 +1,10 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction, RequestHandler } from 'express';
 
 /**
  * wrapping try-catch
  * use promise
  */
-const asyncWrap = (cb: Function) => {
+const asyncWrap = (cb: RequestHandler) => {
   return (req: Request, res: Response, next: NextFunction) => {
     Promise.resolve(cb(req, res, next)).catch(next);
   };
