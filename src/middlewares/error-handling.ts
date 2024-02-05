@@ -8,6 +8,10 @@ export default function () {
     // 개발환경 전용
     console.error(error);
 
+    if (error instanceof SyntaxError) {
+      return res.status(400).send(ResponseEntity.ERROR_WITH(400, '잘못된 Json 형태임미다'));
+    }
+
     if (error instanceof Error) {
       return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send(ResponseEntity.ERROR());
     }
