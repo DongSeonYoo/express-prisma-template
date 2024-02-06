@@ -15,7 +15,8 @@
     "skipLibCheck": true /* 모든 선언 파일(*.d.ts)의 타입 검사 생략 */,
     "resolveJsonModule": true /* .json 확장자로 import된 모듈을 포함 */,
     "strictPropertyInitialization": false,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "noImplicitAny": false
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules", "src/test", "**/*.spec.ts", "**/*.test.ts"]
