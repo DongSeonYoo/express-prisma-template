@@ -8,6 +8,6 @@ export default async function (app: Application) {
 
   // another loader... (ex: database loader..)
 
-  // load global error handling
+  // load global error handling (must be completed at the end of file)
   app.use(errorHandling());
 }
