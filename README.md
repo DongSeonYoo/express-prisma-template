@@ -1,4 +1,4 @@
-# express-ts-prisma template for me
+# express-ts-prisma template
 
 **base on prisma - postgres**
 
