@@ -27,28 +27,29 @@ DATABASE_URL=postgresql://janedoe:mypassword@localhost:5432/mydb
 ## structure
 
 ```shell
-src
-├── apis
-│   ├── test
-│   │   └── test.ts
-│   └── user
-│       └── user.ts
+src/
 ├── app.ts
 ├── configs
 │   └── env.ts
+├── database
+│   └── prisma.database.ts
+├── interfaces
+│   └── IAccount.ts
 ├── middlewares
-│   └── error-handling.ts
+│   ├── error-handling.ts
+│   └── validate.middleware.ts
+├── routes
+│   └── test.routes.ts
+├── services
+│   ├── auth.service.ts
+│   └── index.ts
 └── utils
-    ├── constants
-    │   └── validate-message.ts
     ├── loaders
     │   ├── express.ts
-    │   ├── index.ts
-    │   └── set-route.ts
+    │   └── index.ts
     └── modules
-        ├── async-wrap.ts
-        ├── custom-error.ts
-        ├── http-status.ts
-        ├── response-entity.ts
-        └── validater.ts
+        ├── async-wrap.module.ts
+        ├── custom-error.module.ts
+        ├── http-status.module.ts
+        └── response-entity.module.ts
 ```
