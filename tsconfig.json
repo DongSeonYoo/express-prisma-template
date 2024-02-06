@@ -16,8 +16,11 @@
     "resolveJsonModule": true /* .json 확장자로 import된 모듈을 포함 */,
     "strictPropertyInitialization": false,
     "strictNullChecks": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
   },
-  "include": ["./src/**/*"],
+  "include": [
+        "src/*",
+        "src/types/*.d.ts"
+    ],
   "exclude": ["node_modules", "src/test", "**/*.spec.ts", "**/*.test.ts"]
 }
