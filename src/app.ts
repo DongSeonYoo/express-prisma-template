@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import express from 'express';
 import loader from './utils/loaders';
 import { env } from './configs/env';
