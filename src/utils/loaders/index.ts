@@ -2,7 +2,7 @@ import { Application } from 'express';
 import expressLoader from './express';
 import errorHandling from '../../middlewares/error-handling';
 
-export default async function (app: Application) {
+export default function (app: Application) {
   // load global middleware of express
   expressLoader(app);
 
