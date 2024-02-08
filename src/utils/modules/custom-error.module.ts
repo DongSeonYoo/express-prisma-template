@@ -11,7 +11,7 @@ export class CustomError {
 }
 
 export class BadRequestException extends CustomError {
-  constructor(message: string = 'BadRequestException', reason?: any) {
+  constructor(message: string = 'BadRequestException', reason: Object = {}) {
     super(message, reason);
     this.statusCode = HttpStatus.BAD_REQUEST;
     this.reason = reason;
