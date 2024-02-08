@@ -1,5 +1,4 @@
 import 'reflect-metadata';
-import Container from 'typedi';
 import { Prisma } from '../../src/database/prisma.database';
 import { ILoginRequest, ILoginResponse } from '../../src/interfaces/account/ILogin';
 import { AuthService } from '../../src/services/auth.service';
@@ -11,8 +10,7 @@ describe('authService', () => {
 
   beforeEach(() => {
     prismaMock = new Prisma(); // Prisma 클래스의 mock 객체 생성
-    Container.set('Prisma', prismaMock);
-    authService = Container.get(AuthService);
+    authService = new AuthService(prismaMock);
   });
 
   it('login 메소드는 주어진 유효한 로그인 정보로 올바른 accessToken을 반환해야 함', async () => {
@@ -48,9 +46,9 @@ describe('authService', () => {
     prismaMock.accountTb.findUnique = jest.fn().mockResolvedValue(null);
 
     // when
-    const response = await authService.login(invalidLoginDto);
+    const result = authService.login(invalidLoginDto);
 
-    // then
-    expect(response).rejects.toThrow(BadRequestException);
+    // // then
+    await expect(result).rejects.toBeInstanceOf(BadRequestException);
   });
 });
