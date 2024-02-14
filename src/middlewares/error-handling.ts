@@ -9,7 +9,9 @@ export default function () {
     console.error(error);
 
     if (error instanceof SyntaxError) {
-      return res.status(400).send(ResponseEntity.ERROR_WITH(400, '잘못된 Json 형태임미다'));
+      return res
+        .status(HttpStatus.BAD_REQUEST)
+        .send(ResponseEntity.ERROR_WITH(400, '잘못된 Json 형태임미다'));
     }
 
     if (error instanceof Error) {
