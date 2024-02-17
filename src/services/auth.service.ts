@@ -1,14 +1,13 @@
 import { Service } from 'typedi';
 import { Prisma } from '../database/prisma.database';
 import { IAccount } from '../interfaces/account/IAccount';
-import { ILoginRequest, ILoginResponse } from '../interfaces/account/ILogin';
 import { BadRequestException } from '../utils/modules/custom-error.module';
 
 @Service()
 export class AuthService {
   constructor(private readonly prisma: Prisma) {}
 
-  async getUserProfile(userIdx: number): Promise<IAccount.IViewProfile.Response> {
+  async getUserProfile(userIdx: number): Promise<IAccount.IProfile> {
     const accountInfo = await this.prisma.accountTb.findUnique({
       where: {
         id: userIdx,
@@ -36,7 +35,7 @@ export class AuthService {
     };
   }
 
-  async login(loginDto: ILoginRequest): Promise<ILoginResponse> {
+  async login(loginDto: IAccount.ILogin): Promise<IAccount> {
     const findUser = await this.prisma.accountTb.findUnique({
       where: {
         loginId: loginDto.loginId,
