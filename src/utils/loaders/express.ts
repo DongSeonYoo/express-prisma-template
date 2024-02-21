@@ -1,9 +1,11 @@
 import { Application, json } from 'express';
 import cookieParser from 'cookie-parser';
-import testRouter from '../../routes/test.routes';
+import authRouter from '../../routes/auth.routes';
+import postRouter from '../../routes/post.routes';
 
 export default function (app: Application) {
   app.use(json());
   app.use(cookieParser());
-  app.use('/test', testRouter);
+  app.use('/auth', authRouter);
+  app.use('/post', postRouter);
 }
