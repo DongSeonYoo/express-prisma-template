@@ -20,7 +20,6 @@ export const validate = (validations: ContextRunner[]) => {
         const reason = errors
           .array()
           .map((error) => `[${error['location']}]${error['path']}: ${error['msg']}`);
-
         throw new BadRequestException('validation error', reason);
       }
       return next();
